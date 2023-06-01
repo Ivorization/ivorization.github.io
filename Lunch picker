@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Lunch Picker</title>
+	<style>
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Random Lunch Picker</h1>
+	<p>Click the button to randomly choose a lunch option:</p>
+	<button id="random-button" onclick="pickRandomLunch()">Anything</button>
+	<p id="result"></p>
+	<script>
+		var lunchOptions = [
+			"Sandwiches",
+			"Salads",
+			"Wraps",
+			"Soup",
+			"Sushi",
+			"Noodles",
+			"Rice Bowls",
+			"Pizza",
+			"Tacos",
+			"Quiches",
+			"Burritos",
+			"Falafel",
+			"Kebabs",
+			"Shawarma",
+			"Bento Boxes",
+			"Bagels",
+			"Paninis",
+			"Empanadas",
+			"Dumplings",
+			"Fried Rice",
+			"Stir Fry",
+			"Ramen",
+			"Pho",
+			"Pad Thai",
+			"Bibimbap",
+			"Samosas",
+			"Pierogies",
+			"Calzones",
+			"Fajitas",
+			"Enchiladas",
+			"Chili",
+			"Grilled Cheese",
+			"Quesadillas",
+			"Gyros",
+			"Pita Pockets",
+			"Caesar Salad",
+			"Cobb Salad",
+			"Greek Salad",
+			"Caesar Wrap",
+			"Caprese Salad",
+			"Niçoise Salad",
+			"Chicken Salad",
+			"Egg Salad",
+			"Tuna Salad",
+			"Spinach Salad",
+			"Gnocchi",
+			"Ravioli",
+			"Lasagna",
+			"Spaghetti",
+			"Meatballs"
+		];
+
+		function pickRandomLunch() {
+			var randomLunch = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
+			document.getElementById("result").innerHTML = randomLunch;
+		}
+	</script>
+</body>
+</html>
