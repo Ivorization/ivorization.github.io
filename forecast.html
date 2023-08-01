@@ -47,7 +47,11 @@
                 // Display the forecast for the next 9 days
                 let forecastText = '';
                 for (let i = 0; i < data.weatherForecast.length; i++) {
-                    forecastText += 'Day ' + (i + 1) + ': ' + data.weatherForecast[i].forecastDesc + '\n';
+                    forecastText += 'Date: ' + data.weatherForecast[i].forecastDate + '\n';
+                    forecastText += 'Week: ' + data.weatherForecast[i].week + '\n';
+                    forecastText += 'Weather: ' + data.weatherForecast[i].forecastWeather + '\n';
+                    forecastText += 'Temperature: ' + data.weatherForecast[i].forecastMintemp.value + ' - ' + data.weatherForecast[i].forecastMaxtemp.value + '\n';
+                    forecastText += 'Humidity: ' + data.weatherForecast[i].forecastMinrh.value + '% - ' + data.weatherForecast[i].forecastMaxrh.value + '%\n\n';
                 }
                 document.getElementById('forecast').innerText = forecastText;
             });
