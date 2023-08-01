@@ -36,6 +36,12 @@
         .day h3 {
             margin-top: 0;
         }
+
+        .advice {
+            color: red;
+            font-size: larger;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +70,20 @@
                     forecastText += '<p><strong>Weather:</strong> ' + data.weatherForecast[i].forecastWeather + '</p>';
                     forecastText += '<p><strong>Temperature:</strong> ' + data.weatherForecast[i].forecastMintemp.value + ' - ' + data.weatherForecast[i].forecastMaxtemp.value + '</p>';
                     forecastText += '<p><strong>Humidity:</strong> ' + data.weatherForecast[i].forecastMinrh.value + '% - ' + data.weatherForecast[i].forecastMaxrh.value + '%</p>';
+
+                    // Check if the forecast mentions 'rain', 'showers', or 'thunderstorms' for umbrella advice
+                    if (data.weatherForecast[i].forecastWeather.toLowerCase().includes('rain') || 
+                        data.weatherForecast[i].forecastWeather.toLowerCase().includes('showers') || 
+                        data.weatherForecast[i].forecastWeather.toLowerCase().includes('thunderstorms')) {
+                        forecastText += '<p class="advice">Advice: Bring an umbrella.</p>';
+                    }
+                    
+                    // Check if the forecast mentions 'sunny' or 'hot' for sunscreen advice
+                    if (data.weatherForecast[i].forecastWeather.toLowerCase().includes('sunny') || 
+                        data.weatherForecast[i].forecastWeather.toLowerCase().includes('hot')) {
+                        forecastText += '<p class="advice">Advice: Apply sunscreen.</p>';
+                    }
+
                     forecastText += '</div>';
                 }
                 document.getElementById('forecast').innerHTML = forecastText;
