@@ -60,13 +60,8 @@
     <div id="map"></div>
 
     <script>
-        function initMap() {
-            // Initialize Google Maps
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15
-            });
-
-            // Get user's current location
+        // Function to show nearest place
+        function showNearestPlace(placeType) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var userLocation = {
@@ -74,34 +69,33 @@
                         lng: position.coords.longitude
                     };
 
-                    // Center the map on the user's current location
-                    map.setCenter(userLocation);
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 15,
+                        center: userLocation
+                    });
 
-                    // Function to show nearest place
-                    function showNearestPlace(placeType) {
-                        var request = {
-                            location: userLocation,
-                            radius: 5000, // Search within a 5km radius
-                            type: [placeType]
-                        };
+                    var request = {
+                        location: userLocation,
+                        radius: 5000, // Search within a 5km radius
+                        type: [placeType]
+                    };
 
-                        var service = new google.maps.places.PlacesService(map);
+                    var service = new google.maps.places.PlacesService(map);
 
-                        service.nearbySearch(request, function(results, status) {
-                            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                                // Clear previous markers
-                                for (var i = 0; i < markers.length; i++) {
-                                    markers[i].setMap(null);
-                                }
-                                markers = [];
-
-                                // Show the nearest places on the map
-                                for (var i = 0; i < results.length; i++) {
-                                    createMarker(results[i]);
-                                }
+                    service.nearbySearch(request, function(results, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            // Clear previous markers
+                            for (var i = 0; i < markers.length; i++) {
+                                markers[i].setMap(null);
                             }
-                        });
-                    }
+                            markers = [];
+
+                            // Show the nearest places on the map
+                            for (var i = 0; i < results.length; i++) {
+                                createMarker(results[i]);
+                            }
+                        }
+                    });
 
                     // Create markers for each nearby place
                     var markers = [];
@@ -119,6 +113,6 @@
         }
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqUwwJqgjSBPCeqT5wa1NfORzEr_6n4bY&libraries=places&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqUwwJqgjSBPCeqT5wa1NfORzEr_6n4bY&libraries=places" async defer></script>
 </body>
 </html>
