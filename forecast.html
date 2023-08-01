@@ -17,14 +17,13 @@
     <div class="container mt-5">
         <div class="text-center">
             <h1>Hong Kong Weather Forecast</h1>
-            <button id="checkButton" class="btn btn-primary mt-3">Check Weather</button>
         </div>
         <div id="generalSituation" class="mt-5"></div>
         <div id="forecast" class="mt-3"></div>
     </div>
     <script>
-        document.getElementById('checkButton').addEventListener('click', function() {
-            // Make the request to the API
+        // Function to fetch and display the weather data
+        function fetchWeatherData() {
             fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en')
             .then(response => response.json())
             .then(data => {
@@ -58,7 +57,10 @@
                 }
                 document.getElementById('forecast').innerHTML = forecastText;
             });
-        });
+        }
+
+        // Fetch the weather data when the page loads
+        fetchWeatherData();
     </script>
 </body>
 </html>
