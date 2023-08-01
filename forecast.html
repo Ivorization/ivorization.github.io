@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hong Kong Weather Forecast</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            background-color: #007cbf;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content {
+            margin: 15px;
+        }
+
+        .forecast {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Hong Kong Weather Forecast</h1>
+    </div>
+    <div class="content">
+        <button id="checkButton">Check Weather</button>
+        <div id="generalSituation" class="forecast"></div>
+        <div id="forecast" class="forecast"></div>
+    </div>
+    <script>
+        document.getElementById('checkButton').addEventListener('click', function() {
+            // Make the request to the API
+            fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en')
+            .then(response => response.json())
+            .then(data => {
+                // Display the general situation
+                document.getElementById('generalSituation').innerText = 'General Situation: ' + data.generalSituation;
+
+                // Display the forecast for the next 9 days
+                let forecastText = '';
+                for (let i = 0; i < data.weatherForecast.length; i++) {
+                    forecastText += 'Day ' + (i + 1) + ': ' + data.weatherForecast[i].forecastDesc + '\n';
+                }
+                document.getElementById('forecast').innerText = forecastText;
+            });
+        });
+    </script>
+</body>
+</html>
